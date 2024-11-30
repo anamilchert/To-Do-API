@@ -7,4 +7,8 @@ const createTask = (req, res) => {
   res.status(201).json(newTask);
 };
 
-module.exports = { createTask };
+const getTasks = (req, res) => {
+    res.status(200).json(tasks);
+  };
+  
+  module.exports = { createTask, getTasks };  
