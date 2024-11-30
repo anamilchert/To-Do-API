@@ -24,4 +24,16 @@ const getTasks = (req, res) => {
     res.status(200).json(tasks[taskIndex]);
   };
   
-  module.exports = { createTask, getTasks, updateTask };  
+  const deleteTask = (req, res) => {
+    const { id } = req.params;
+  
+    const taskIndex = tasks.findIndex(task => task.id === parseInt(id));
+    if (taskIndex === -1) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+  
+    tasks.splice(taskIndex, 1);
+    res.status(204).send();
+  };
+  
+  module.exports = { createTask, getTasks, updateTask, deleteTask };  
