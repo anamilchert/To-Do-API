@@ -10,5 +10,18 @@ const createTask = (req, res) => {
 const getTasks = (req, res) => {
     res.status(200).json(tasks);
   };
+
+  const updateTask = (req, res) => {
+    const { id } = req.params;
+    const { title, description } = req.body;
   
-  module.exports = { createTask, getTasks };  
+    const taskIndex = tasks.findIndex(task => task.id === parseInt(id));
+    if (taskIndex === -1) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+  
+    tasks[taskIndex] = { id: parseInt(id), title, description };
+    res.status(200).json(tasks[taskIndex]);
+  };
+  
+  module.exports = { createTask, getTasks, updateTask };  
